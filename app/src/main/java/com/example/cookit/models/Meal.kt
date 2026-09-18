@@ -1,11 +1,14 @@
 package com.example.cookit.models
 
-import com.google.gson.annotations.SerializedName
+import com.example.cookit.AppConstants
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 class Meal(
     val idMeal: String,
-    @SerializedName("strMeal")
+    @SerialName(AppConstants.mealNameKey)
     val name: String,
-    @SerializedName("strMealThumb")
+    @SerialName(AppConstants.mealImageKey)
     val imageUrl: String,
 )

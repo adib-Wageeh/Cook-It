@@ -61,9 +61,9 @@ fun HomeScreen(categories: List<Category>, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         LazyRow(modifier = modifier) {
             items(categories) {
-                CategoryItem(it) { category ->
-                    if (selectedCategory?.idCategory != category.idCategory) {
-                        selectedCategory = category
+                CategoryItem(it) {
+                    if (selectedCategory?.idCategory != it.idCategory) {
+                        selectedCategory = it
                     }
                 }
             }

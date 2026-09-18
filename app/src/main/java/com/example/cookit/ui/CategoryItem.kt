@@ -34,7 +34,7 @@ import com.example.cookit.ui.theme.Yellow
 fun CategoryItem(
     category: Category,
     modifier: Modifier = Modifier,
-    categoryPressed: (category: Category) -> Unit,
+    categoryPressed: () -> Unit,
 ) {
 
 
@@ -43,7 +43,7 @@ fun CategoryItem(
             .padding(8.dp)
             .width(96.dp)
             .clickable {
-                categoryPressed(category)
+                categoryPressed()
             },
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

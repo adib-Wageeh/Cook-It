@@ -3,11 +3,13 @@ package com.example.cookit.network
 import com.example.cookit.AppConstants
 import com.example.cookit.models.CategoriesResponse
 import com.example.cookit.models.MealsResponse
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Call
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import kotlinx.serialization.json.Json
 
 
 interface MealsCallable {
@@ -22,10 +24,12 @@ interface MealsCallable {
 }
 
 fun getCallable(): MealsCallable {
-    val retroFit = Retrofit.Builder()
-        .baseUrl(AppConstants.baseUrl)
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-    return retroFit.create(MealsCallable::class.java)
+    val json = Json { ignoreUnknownKeys = true } // recommended: tolerate extra API fields
 
+    val retrofit = Retrofit.Builder()
+        .baseUrl(AppConstants.baseUrl)
+        .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+        .build()
+
+    return retrofit.create(MealsCallable::class.java)
 }
